@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ChatGPT Code Generator</title>
+</head>
+<body>
+    <h1>ChatGPT Code Generator</h1>
+    <p>Enter your code request:</p>
+    <input type="text" id="codeRequest">
+    <br>
+    <button id="precise">Precise (0.0)</button>
+    <button id="balanced">Balanced (0.5)</button>
+    <button id="creative">Creative (0.8)</button>
+    <script>
+        const vscode = acquireVsCodeApi();
+
+        document.getElementById('precise').addEventListener('click', () => {
+            const codeRequest = document.getElementById('codeRequest').value;
+            vscode.postMessage({
+                type: 'generateCode',
+                codeRequest,
+                temperature: 0.0
+            });
+        });
+
+        document.getElementById('balanced').addEventListener('click', () => {
+            const codeRequest = document.getElementById('codeRequest').value;
+            vscode.postMessage({
+                type: 'generateCode',
+                codeRequest,
+                temperature: 0.5
+            });
+        });
+
+        document.getElementById('creative').addEventListener('click', () => {
+            const codeRequest = document.getElementById('codeRequest').value;
+            vscode.postMessage({
+                type: 'generateCode',
+                codeRequest,
+                temperature: 0.8
+            });
+        });
+    </script>
+</body>
+</html>
