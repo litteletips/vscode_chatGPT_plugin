@@ -1,0 +1,123 @@
+{
+  "name": "vscode-chatgpt-plugin",
+  "displayName": "vscode_chatGPT_plugin",
+  "description": "VSCode extension for using ChatGPT to generate code, find bugs, and more",
+  "version": "0.0.1",
+  "engines": {
+    "vscode": "^1.76.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "activationEvents": [],
+  "main": "./dist/extension.js",
+  "contributes": {
+    "configuration": {
+      "title": "chatGPT or GPT-4 Extension",
+      "properties": {
+        "gpt4Extension.apiKey": {
+          "type": "string",
+          "default": "",
+          "description": "Your OpenAI API key for the GPT-4 Extension"
+        },
+        "gpt4Extension.model": {
+          "type": "string",
+          "enum": [
+            "gpt-3.5-turbo",
+            "GPT-4"
+          ],
+          "enumDescriptions": [
+            "gpt-3.5-turbo",
+            "GPT-4"
+          ],
+          "default": "gpt-3.5-turbo",
+          "description": "Select the OpenAI model to use with the GPT-4 Extension"
+        }
+      }
+    },
+    "commands": [
+      {
+        "command": "chatgpt-extension.findBugs",
+        "title": "Find Bugs"
+      },
+      {
+        "command": "chatgpt-extension.optimize",
+        "title": "Optimize"
+      },
+      {
+        "command": "chatgpt-extension.explain",
+        "title": "Explain"
+      },
+      {
+        "command": "chatgpt-extension.addComments",
+        "title": "Add Comments"
+      },
+      {
+        "command": "chatgpt-extension.addTests",
+        "title": "Add Tests"
+      },
+      {
+        "command": "chatgpt-extension.openEditor",
+        "title": "Open Editor"
+      }
+    ],
+    "menus": {
+      "editor/context": [
+        {
+          "command": "chatgpt-extension.findBugs",
+          "group": "navigation"
+        },
+        {
+          "command": "chatgpt-extension.optimize",
+          "group": "navigation"
+        },
+        {
+          "command": "chatgpt-extension.explain",
+          "group": "navigation"
+        },
+        {
+          "command": "chatgpt-extension.addComments",
+          "group": "navigation"
+        },
+        {
+          "command": "chatgpt-extension.addTests",
+          "group": "navigation"
+        },
+        {
+          "command": "chatgpt-extension.openEditor",
+          "group": "navigation"
+        }
+      ]
+    }
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run package",
+    "compile": "webpack",
+    "watch": "webpack --watch",
+    "package": "webpack --mode production --devtool hidden-source-map",
+    "compile-tests": "tsc -p . --outDir out",
+    "watch-tests": "tsc -p . -w --outDir out",
+    "pretest": "npm run compile-tests && npm run compile && npm run lint",
+    "lint": "eslint src --ext ts",
+    "test": "node ./out/test/runTest.js"
+  },
+  "devDependencies": {
+    "@types/glob": "^8.1.0",
+    "@types/mocha": "^10.0.1",
+    "@types/node": "16.x",
+    "@types/vscode": "^1.76.0",
+    "@typescript-eslint/eslint-plugin": "^5.56.0",
+    "@typescript-eslint/parser": "^5.56.0",
+    "@vscode/test-electron": "^2.3.0",
+    "eslint": "^8.36.0",
+    "glob": "^8.1.0",
+    "mocha": "^10.2.0",
+    "ts-loader": "^9.4.2",
+    "typescript": "^4.9.5",
+    "webpack": "^5.76.3",
+    "webpack-cli": "^5.0.1"
+  },
+  "dependencies": {
+    "axios": "^1.3.4"
+  }
+}
